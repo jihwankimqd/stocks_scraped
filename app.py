@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
 # from stock_scraper import get_stocks
-from assets.balance_sheet_scraper import get_balance_sheet
+from balance_sheet_scraper import get_balance_sheet
 import pandas_datareader.data as web
 from datetime import datetime as dt
 
