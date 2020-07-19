@@ -23,8 +23,10 @@ stock_data = df1.to_dict('records')
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = flask.Flask(__name__)
+server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
+app = dash.Dash(__name__,server=server,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 
 app.layout = html.Div([
