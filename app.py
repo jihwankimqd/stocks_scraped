@@ -10,7 +10,8 @@ import pandas_datareader.data as web
 from datetime import datetime as dt
 
 ###
-df = pd.read_csv('assets/kospi_data.csv')
+url = 'https://raw.githubusercontent.com/jihwankimqd/stocks_scraped/master/kospi_data.csv'
+df = pd.read_csv(url,sep=",")
 col = ['기업명', '종목코드']
 df1 = df[col].copy()
 df1.columns = ['label','value']
