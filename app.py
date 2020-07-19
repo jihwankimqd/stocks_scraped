@@ -5,12 +5,12 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
 # from stock_scraper import get_stocks
-from balance_sheet_scraper import get_balance_sheet
+from assets.balance_sheet_scraper import get_balance_sheet
 import pandas_datareader.data as web
 from datetime import datetime as dt
 
 ###
-df = pd.read_csv('kospi_data.csv')
+df = pd.read_csv('assets/kospi_data.csv')
 col = ['기업명', '종목코드']
 df1 = df[col].copy()
 df1.columns = ['label','value']
