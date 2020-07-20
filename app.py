@@ -24,13 +24,8 @@ stock_data = df1.to_dict('records')
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 
-# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-from random import randint
-import flask
-import os
-server = flask.Flask(__name__)
-server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
-app = dash.Dash(__name__,server=server,external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 
 app.layout = html.Div([
