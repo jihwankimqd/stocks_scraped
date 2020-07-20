@@ -179,13 +179,6 @@ app.layout = html.Div([
     html.Div(id='display-value')
 ])
 
-@app.callback(dash.dependencies.Output('display-value', 'children'),
-              [dash.dependencies.Input('dropdown', 'value')])
-def display_value(value):
-    return 'You have selected "{}"'.format(value)
-
-
-
 # Stock Table
 @app.callback(Output('stock-table', 'children'), [Input('my-dropdown', 'value')])
 def generate_stock_table(stock_id, max_rows=17):
