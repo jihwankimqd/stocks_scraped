@@ -141,21 +141,13 @@ app.layout = html.Div([
         html.H2('Hello World'),
         dcc.Dropdown(
             id='dropdown',
-            options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-            value='LA'
-        ),
-        html.Div(id='display-value'),
-        
-        html.H2('Choose a Stock Ticker'),
-        dcc.Dropdown(
-            id='my-dropdown',
             options=[
             {'label': 'Samsung', 'value': '005930'},
             {'label': 'SKInnovation', 'value': '096770'}
         ],
-            # options=stock_data,
             value='005930'
-        )
+        ),
+        html.Div(id='display-value'),
     ])
     
 ])
