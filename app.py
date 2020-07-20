@@ -8,6 +8,8 @@ import pandas as pd
 from balance_sheet_scraper import get_balance_sheet
 import pandas_datareader.data as web
 from datetime import datetime as dt
+import os
+
 
 ###
 url = 'https://raw.githubusercontent.com/jihwankimqd/stocks_scraped/master/kospi_data.csv'
