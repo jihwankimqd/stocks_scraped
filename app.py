@@ -156,13 +156,6 @@ stock_data = df1.to_dict('records')
 ###
 
 app.layout = html.Div([
-    html.H2('Hello World'),
-
-    dcc.Dropdown(
-        id='dropdown',
-        options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-        value='LA'
-    ),
     html.H2('Choose a Stock Ticker'),
 
     dcc.Dropdown(
