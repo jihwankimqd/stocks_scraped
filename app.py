@@ -135,18 +135,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-###
-# url = 'https://raw.githubusercontent.com/jihwankimqd/stocks_scraped/master/kospi_data.csv'
-# df = pd.read_csv(url,sep=",")
-# col = ['기업명', '종목코드']
-# df1 = df[col].copy()
-# df1.columns = ['label','value']
-# df1['value'] = df1['value'].apply(str)
-# df1['value'] = df1['value'].str.zfill(6)
-# df1['label'] = df1['label']+' ('+df1['value']+')'
-# stock_data = df1.to_dict('records')
-###
-
 app.layout = html.Div([
 
     html.Div([
@@ -156,10 +144,8 @@ app.layout = html.Div([
             options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
             value='LA'
         ),
-        html.Div(id='display-value')
-    ]),
-
-    html.Div([
+        html.Div(id='display-value'),
+        
         html.H2('Choose a Stock Ticker'),
         dcc.Dropdown(
             id='my-dropdown',
@@ -169,8 +155,7 @@ app.layout = html.Div([
         ],
             # options=stock_data,
             value='005930'
-        ),
-    
+        )
     ])
     
 ])
