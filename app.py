@@ -75,21 +75,21 @@ app.layout = html.Div([
 ])
 
 # Stock Table
-@app.callback(Output('stock-table', 'children'), [Input('my-dropdown', 'value')])
-def generate_stock_table(stock_id, max_rows=17):
-    # Get stock data using web.DataReader(), which conveniently has a built-in function for Naver Finance
-    dataframe = web.DataReader(stock_id, 'naver', start='2015-01-01', end=dt.now()).reset_index()
-    dataframe['Date'] = pd.to_datetime(dataframe['Date']).dt.date
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[-i-1][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
+# @app.callback(Output('stock-table', 'children'), [Input('my-dropdown', 'value')])
+# def generate_stock_table(stock_id, max_rows=17):
+#     # Get stock data using web.DataReader(), which conveniently has a built-in function for Naver Finance
+#     dataframe = web.DataReader(stock_id, 'naver', start='2015-01-01', end=dt.now()).reset_index()
+#     dataframe['Date'] = pd.to_datetime(dataframe['Date']).dt.date
+#     return html.Table([
+#         html.Thead(
+#             html.Tr([html.Th(col) for col in dataframe.columns])
+#         ),
+#         html.Tbody([
+#             html.Tr([
+#                 html.Td(dataframe.iloc[-i-1][col]) for col in dataframe.columns
+#             ]) for i in range(min(len(dataframe), max_rows))
+#         ])
+#     ])
 
 # Balance Sheet
 @app.callback(Output('balance-table', 'children'), [Input('my-dropdown', 'value')])
