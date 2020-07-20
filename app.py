@@ -127,29 +127,34 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
-import pandas as pd
-
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-app.layout = html.Div([
 
-    html.Div([
-        html.H2('Hello World'),
-        dcc.Dropdown(
-            id='dropdown',
-            options=[
-            {'label': 'Samsung', 'value': '005930'},
-            {'label': 'SKInnovation', 'value': '096770'}
-        ],
-            value='005930'
-        ),
-        html.Div(id='display-value'),
-    ])
+app.layout = html.Div([
+    html.H2('Hello World'),
+
+    dcc.Dropdown(
+        id='dropdown',
+        options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
+        value='LA'
+    ),
+    html.H2('Choose a Stock Ticker'),
     
+    dcc.Dropdown(
+        id='my-dropdown',
+        options=[
+        {'label': 'Samsung', 'value': '005930'},
+        {'label': 'SKInnovation', 'value': '096770'}
+    ],
+        # options=stock_data,
+        value='005930'
+    ),
+
+    html.Div(id='display-value')
 ])
 
 @app.callback(dash.dependencies.Output('display-value', 'children'),
