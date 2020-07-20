@@ -11,8 +11,9 @@ import requests
 
 
 ###
-url = 'https://raw.githubusercontent.com/jihwankimqd/stocks_scraped/master/kospi_data.csv'
-df = pd.read_csv(url,sep=",")
+# url = 'https://raw.githubusercontent.com/jihwankimqd/stocks_scraped/master/kospi_data.csv'
+# df = pd.read_csv(url,sep=",")
+df = pd.read_csv('kospi_data.csv')
 col = ['기업명', '종목코드']
 df1 = df[col].copy()
 df1.columns = ['label','value']
