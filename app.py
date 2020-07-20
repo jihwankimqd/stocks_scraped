@@ -168,13 +168,19 @@ app.layout = html.Div([
     dcc.Graph(id='my-graph'),
     html.P(''),
 
+    html.Div([
     html.H4(children='Stock Data'),
     html.Table(id='stock-table'),
     html.P(''),
+    ],style={'width': '40%', 'float': 'right', 'display': 'inline-block'}),
 
+    html.Div([
     html.H4(children='Financial Information'),
     html.Table(id='balance-table'),
-    html.P(''),
+    html.P('')
+    ],style={'width': '55%', 'float': 'left', 'display': 'inline-block'}),
+
+
 
     html.Div(id='display-value')
 ])
