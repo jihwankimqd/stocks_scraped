@@ -156,6 +156,16 @@ stock_data = df1.to_dict('records')
 ###
 
 app.layout = html.Div([
+
+    # html.H2('Choose a Stock Ticker'),
+
+    dcc.Link(
+    html.Button('Github'),
+    href='https://github.com/jihwankimqd/stocks_scraped', target="_blank"),
+
+    html.Br(),
+    html.Br(),
+
     html.H2('Choose a Stock Ticker'),
 
     dcc.Dropdown(
@@ -163,6 +173,8 @@ app.layout = html.Div([
         options=stock_data,
         value='005930'
     ),
+
+    html.Br(),
 
     html.H2('Stock Graph'),
     dcc.Graph(id='my-graph'),
@@ -180,9 +192,12 @@ app.layout = html.Div([
     html.P('')
     ],style={'width': '55%', 'float': 'left', 'display': 'inline-block'}),
 
+    
 
 
-    html.Div(id='display-value')
+    html.Div(id='display-value'),
+
+    
 ])
 
 # Stock Table
