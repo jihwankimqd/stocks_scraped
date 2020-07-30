@@ -137,6 +137,9 @@ from balance_sheet_scraper import get_balance_sheet
 
 from stock_predictor import stock_predict
 
+import plotly.tools as tls
+
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -247,7 +250,6 @@ def update_graph(stock_id):
         }]
     }
 
-import plotly.tools as tls
 # Stock Prediction
 @app.callback(Output('stock_prediction', 'figure'), [Input('my-dropdown', 'value')])
 def update_prediction(stock_id):
