@@ -135,7 +135,7 @@ from datetime import datetime as dt
 
 from balance_sheet_scraper import get_balance_sheet
 
-
+from stock_predictor import stock_predict
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -193,6 +193,9 @@ app.layout = html.Div([
     ],style={'width': '55%', 'float': 'left', 'display': 'inline-block'}),
 
     
+    html.H2('Predicted Price Graph Using ML'),
+    dcc.Graph(id='stock_prediction'),
+    html.P(''),
 
 
     html.Div(id='display-value'),
@@ -244,6 +247,26 @@ def update_graph(stock_id):
         }]
     }
 
+import plotly.tools as tls
+# Stock Prediction
+@app.callback(Output('stock_prediction', 'figure'), [Input('my-dropdown', 'value')])
+def update_prediction(stock_id):
+    dataframe = stock_predict(stock_id)
+    # predicted = dataframe.Close + dataframe.Forecast
 
+    fig = tls.make_subplots(rows=1, cols=1, shared_xaxes=True,vertical_spacing=0.009,horizontal_spacing=0.009)
+    fig['layout']['margin'] = {'l': 30, 'r': 10, 'b': 50, 't': 25}
+
+    fig.append_trace({'x':dataframe.index,'y':dataframe.Close,'type':'scatter','name':'Historical Price'},1,1)
+    fig.append_trace({'x':dataframe.index,'y':dataframe.Forecast,'type':'scatter','name':'Predicted Price'},1,1)
+    return fig
+    # return {
+    #     'data': [{
+    #         'x': dataframe.index,
+    #         'y': dataframe.Close
+    #     }]
+    # }
+
+            
 if __name__ == '__main__':
     app.run_server(debug=True)
