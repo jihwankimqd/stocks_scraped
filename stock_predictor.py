@@ -84,11 +84,6 @@ def stock_predict(stockid):
     clfsvm = SVR(kernel='rbf', C=1e3, gamma=0.1) 
     clfsvm.fit(X_train, y_train)
 
-    # KNN Regression
-    clfknn = KNeighborsRegressor(n_neighbors=2)
-    clfknn.fit(X_train, y_train)
-
-
     confidencereg = clfreg.score(X_test, y_test)
     confidencepoly2 = clfpoly2.score(X_test,y_test)
     confidencepoly3 = clfpoly3.score(X_test,y_test)
