@@ -134,6 +134,8 @@ import pandas_datareader.data as web
 from datetime import datetime as dt
 
 from balance_sheet_scraper import get_balance_sheet
+from balance_sheet_scraper_updated import get_balance_sheet_updated
+
 
 from stock_predictor import stock_predict
 
@@ -226,7 +228,13 @@ def generate_stock_table(stock_id, max_rows=17):
 # Balance Sheet
 @app.callback(Output('balance-table', 'children'), [Input('my-dropdown', 'value')])
 def generate_balance_table(stock_id, max_rows=16):
-    dataframe = get_balance_sheet(stock_id)
+    # Samsung released new figures, but other companies are slower at updating their figures.
+    
+    try:
+        dataframe = get_balance_sheet_updated(stock_id)
+    except KeyError:
+        dataframe = get_balance_sheet(stock_id)
+
     return html.Table([
         html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
