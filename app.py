@@ -142,9 +142,10 @@ from stock_predictor import stock_predict
 import plotly.tools as tls
 
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
@@ -162,28 +163,38 @@ stock_data = df1.to_dict('records')
 
 app.layout = html.Div([
 
-    # html.H2('Choose a Stock Ticker'),
-
     dcc.Link(
     html.Button('Github'),
     href='https://github.com/jihwankimqd/stocks_scraped', target="_blank"),
 
-    html.Br(),
-    html.Br(),
+    html.H2('Choose Your Stock'),
 
-    html.H2('Choose a Stock Ticker'),
-
+    html.Div([
     dcc.Dropdown(
         id='my-dropdown',
         options=stock_data,
         value='005930'
     ),
+    ],style={'width': '24%', 'float': 'left', 'display': 'inline-block'}),
 
+    html.Div([
     html.Br(),
+    html.Br()
 
-    html.H2('Stock Graph'),
-    dcc.Graph(id='my-graph'),
+    ]),
+
+    # html.Div([
+    # html.H2('Stock Graph'),
+    # dcc.Graph(id='my-graph'),
+    # html.P(''),
+    # ],style={'width': '100%', 'display': 'inline-block'}),
+
+    html.Div([
+    # html.H2('Predicted Price Graph Using ML'),
+    dcc.Graph(id='stock_prediction'),
     html.P(''),
+    ],style={'width':'100%','display': 'inline-block'}),
+
 
     html.Div([
     html.H4(children='Stock Data'),
@@ -197,10 +208,7 @@ app.layout = html.Div([
     html.P('')
     ],style={'width': '55%', 'float': 'left', 'display': 'inline-block'}),
 
-    
-    html.H2('Predicted Price Graph Using ML'),
-    dcc.Graph(id='stock_prediction'),
-    html.P(''),
+
 
 
     html.Div(id='display-value'),
@@ -246,17 +254,17 @@ def generate_balance_table(stock_id, max_rows=16):
         ])
     ])
 
-# Stock Graph
-@app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
-def update_graph(stock_id):
-    dataframe = web.DataReader(stock_id, 'naver', start='2015-01-01', end=dt.now()).reset_index()
-    dataframe['Date'] = pd.to_datetime(dataframe['Date']).dt.date
-    return {
-        'data': [{
-            'x': dataframe.Date,
-            'y': dataframe.Close
-        }]
-    }
+# # Stock Graph
+# @app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
+# def update_graph(stock_id):
+#     dataframe = web.DataReader(stock_id, 'naver', start='2015-01-01', end=dt.now()).reset_index()
+#     dataframe['Date'] = pd.to_datetime(dataframe['Date']).dt.date
+#     return {
+#         'data': [{
+#             'x': dataframe.Date,
+#             'y': dataframe.Close
+#         }]
+#     }
 
 # Stock Prediction
 @app.callback(Output('stock_prediction', 'figure'), [Input('my-dropdown', 'value')])
@@ -265,17 +273,13 @@ def update_prediction(stock_id):
     # predicted = dataframe.Close + dataframe.Forecast
 
     fig = tls.make_subplots(rows=1, cols=1, shared_xaxes=True,vertical_spacing=0.009,horizontal_spacing=0.009)
-    fig['layout']['margin'] = {'l': 30, 'r': 10, 'b': 50, 't': 25}
+    fig['layout']['margin'] = {'l': 50, 'r': 0, 'b': 50, 't': 50}
 
+    # fig.append_trace({'x':dataframe.index,'y':dataframe.Close,'type':'scatter','name':'Historical Price'},1,1)
+    # fig.append_trace({'x':dataframe.index,'y':dataframe.Forecast,'type':'scatter','name':'Predicted Price'},1,1)
     fig.append_trace({'x':dataframe.index,'y':dataframe.Close,'type':'scatter','name':'Historical Price'},1,1)
     fig.append_trace({'x':dataframe.index,'y':dataframe.Forecast,'type':'scatter','name':'Predicted Price'},1,1)
     return fig
-    # return {
-    #     'data': [{
-    #         'x': dataframe.index,
-    #         'y': dataframe.Close
-    #     }]
-    # }
 
             
 if __name__ == '__main__':

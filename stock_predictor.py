@@ -18,7 +18,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 
 def stock_predict(stockid):
-    df = web.DataReader(str(stockid), 'naver', start='2019-01-01', end=dt.now()).reset_index()
+    df = web.DataReader(str(stockid), 'naver', start='2015-01-01', end=dt.now()).reset_index()
     df['Date'] = pd.to_datetime(df['Date']).dt.date
     df.set_index('Date',inplace=True)
     df.sort_values(by=['Date'],inplace=True,ascending = True)
