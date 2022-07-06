@@ -11,7 +11,7 @@ Flask-Compress==1.5.0
 
 gunicorn==20.0.4
 
-lxml==4.3.4
+lxml==4.9.1
 
 numpy==1.19.0
 
