@@ -22,7 +22,7 @@ plotly==4.8.2
 
 pytz==2019.1
 
-requests==2.22.0
+requests==2.31.0
 
 numpy==1.19.0
 
